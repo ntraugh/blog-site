@@ -24,7 +24,12 @@ const handleChange = (e) => {
 }
 
 const handleClick = (e) => {
+  const { value, name } = e.target
   e.preventDefault()
+  if(!value || !name) {
+    alert("Please fill out all fields")
+    return 
+  }
   axios.post("/create", post)
     .then(res => console.log(res))
     .catch(err => console.log(err))

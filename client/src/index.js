@@ -17,7 +17,6 @@ root.render(
         <Route path='/create' element={<CreatePost />}/> 
         <Route path='/create/posts' element={<Posts />}/> 
       </Routes>
-    
     </BrowserRouter>
   </React.StrictMode>
 );

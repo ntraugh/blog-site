@@ -27,6 +27,7 @@ app.get("/posts", (req, res) => {
 })
 
 app.post("/create", (req, res) => {
+    
     Post.create({
         title: req.body.title,
         description: req.body.description
