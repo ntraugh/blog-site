@@ -7,9 +7,12 @@ function App() {
 
 
   return (
-    <div className="App">
+    <div style={{width: "90%", textAlign: "center", margin: "auto auto"}}>
       <h1>Home Page</h1>
-      <Button onClick={() => navigate("create")}>Next</Button>
+      <Button 
+      variant="outline-dark"
+      style={{width: "100%"}} 
+      onClick={() => navigate("create")}>Next</Button>
     </div>
   );
 }
