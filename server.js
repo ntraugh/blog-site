@@ -34,6 +34,14 @@ app.post("/create", (req, res) => {
     .catch(err => console.log(err))
 })
 
+app.put("/update/:id", (req, res) => {
+    Post.findByIdAndUpdate({_id: req.params.id}, {
+        title: req.body.title,
+        description: req.body.description
+    }).then(doc => console.log(doc))
+    .catch(err => console.log(err))
+})
+
 app.delete("/delete/:id", (req, res) => {
     Post.findByIdAndDelete({_id: req.params.id})
         .then(doc => console.log(doc))

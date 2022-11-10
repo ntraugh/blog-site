@@ -40,6 +40,28 @@ const Posts = () => {
         setUpdatedPost(post)
         handleShow()
     }
+
+    const handleChange = (e) => {
+        const { name, value } = e.target
+        setUpdatedPost((prev) => {
+            return {
+                ...prev, 
+                [name]: value
+            
+            }
+        })
+    }
+
+    const saveUpdatedPost = () => {
+        axios.put(`/update/${updatedPost._id}`, updatedPost)
+            .then(res => console.log(res))
+            .catch(err => console.log(err))
+
+        handleClose()
+        window.location.reload()
+
+    }
+
     
   return (
     <div style={{width: "90%", textAlign: "center", margin: "auto auto"}}>
@@ -51,8 +73,18 @@ const Posts = () => {
             <Modal.Body>
                 <Form>
                     <Form.Group >
-                        <Form.Control style={{marginBottom: "1rem"}} placeholder='title' />
-                        <Form.Control placeholder='description'/>
+                        <Form.Control 
+                        style={{marginBottom: "1rem"}} 
+                        placeholder='title' 
+                        name='title' 
+                        value={updatedPost.title ? updatedPost.title: ""} 
+                        onChange={handleChange}/>
+
+                        <Form.Control 
+                        placeholder='description' 
+                        name='description' 
+                        value={updatedPost.description ? updatedPost.description: ""}
+                        onChange={handleChange}/>
                     </Form.Group>
                 </Form>
             </Modal.Body>
@@ -60,7 +92,7 @@ const Posts = () => {
             <Button variant="secondary" onClick={handleClose}>
                 Close
             </Button>
-            <Button variant="primary" onClick={handleClose}>
+            <Button variant="primary" onClick={saveUpdatedPost}>
                 Save Changes
             </Button>
             </Modal.Footer>
