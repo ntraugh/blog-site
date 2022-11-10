@@ -19,6 +19,11 @@ const Posts = () => {
             })
             .catch(err => console.log(err))
     }, [])
+    const deletePost = (id) => {
+        console.log(id)
+        
+
+    }
     
     
   return (
@@ -33,7 +38,10 @@ const Posts = () => {
                             <p>{post.description}</p>
                             <div style={{display: "flex", flexDirection: "row", justifyContent: "space-between"}}>
                                 <Button variant="outline-primary" style={{width: "100%", marginRight: "1rem"}}>Update</Button>
-                                <Button variant="outline-danger" style={{width: "100%", marginRight: "1rem"}}>Delete</Button>
+                                <Button 
+                                variant="outline-danger" 
+                                style={{width: "100%", marginRight: "1rem"}}
+                                onClick={() => deletePost(post._id)}>Delete</Button>
                             </div>
                         </div>
                     )
@@ -42,9 +50,9 @@ const Posts = () => {
             </>
         ) : ""}
         <Button 
-        style={{width: "100%", marginTop: "1rem"}}
+        style={{width: "100%", margin: "0 0 1rem"}}
         variant="outline-primary" 
-        onClick={() => navigate("posts")}>Back</Button>
+        onClick={() => navigate("create")}>Back</Button>
     </div>
   )
 }
