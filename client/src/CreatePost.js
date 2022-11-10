@@ -24,9 +24,10 @@ const handleChange = (e) => {
 }
 
 const handleClick = (e) => {
-  const { value, name } = e.target
+  
+  
   e.preventDefault()
-  if(!value || !name) {
+  if(!post.title || !post.description) {
     alert("Please fill out all fields")
     return 
   }
