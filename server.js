@@ -34,6 +34,12 @@ app.post("/create", (req, res) => {
     .catch(err => console.log(err))
 })
 
+app.delete("/delete/:id", (req, res) => {
+    Post.findByIdAndDelete({_id: req.params.id})
+        .then(doc => console.log(doc))
+        .catch(err => console.log(err))
+})
+
 app.listen(PORT, () => {
   console.log(`Example app listening on PORT ${PORT}`)
 })

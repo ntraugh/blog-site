@@ -19,8 +19,14 @@ const Posts = () => {
             })
             .catch(err => console.log(err))
     }, [])
+
     const deletePost = (id) => {
-        console.log(id)
+        axios.delete(`/delete/${id}`)
+            .then(res => console.log(res))
+            .catch(err => console.log(err))
+
+        window.location.reload()
+    
         
 
     }
@@ -33,7 +39,7 @@ const Posts = () => {
             <>
                 {posts.map((post) => {
                     return (
-                        <div style={{border: "solid black 1px", borderRadius: "4px", marginBottom: "1rem", padding: "1rem"}}>
+                        <div key={post._id} style={{border: "solid black 1px", borderRadius: "4px", marginBottom: "1rem", padding: "1rem"}}>
                             <h4>{post.title}</h4>
                             <p>{post.description}</p>
                             <div style={{display: "flex", flexDirection: "row", justifyContent: "space-between"}}>
