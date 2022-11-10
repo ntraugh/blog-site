@@ -1,16 +1,21 @@
 import React from 'react'
 import { useEffect, useState } from 'react'
-import { Button } from 'react-bootstrap'
+import { Button, Form } from 'react-bootstrap'
 import axios from 'axios'
 import { useNavigate } from 'react-router-dom'
-
-
+import Modal from "react-bootstrap/Modal"
 
 
 const Posts = () => {
-    const [posts, setPosts] = useState([])
     const navigate = useNavigate()
+    const [posts, setPosts] = useState([])
+    const [show, setShow] = useState(false)
+    const [updatedPost, setUpdatedPost] = useState({})
+
+    const handleClose = () => setShow(false)
+    const handleShow = () => setShow(true) 
     
+
     useEffect(() => {
         axios.get("/posts")
             .then(res => {
@@ -31,10 +36,35 @@ const Posts = () => {
 
     }
     
+    const updatePost = (post) => {
+        setUpdatedPost(post)
+        handleShow()
+    }
     
   return (
     <div style={{width: "90%", textAlign: "center", margin: "auto auto"}}>
         <h1>Posts</h1>
+        <Modal show={show} onHide={handleClose}>
+            <Modal.Header closeButton>
+            <Modal.Title>Update post</Modal.Title>
+            </Modal.Header>
+            <Modal.Body>
+                <Form>
+                    <Form.Group >
+                        <Form.Control style={{marginBottom: "1rem"}} placeholder='title' />
+                        <Form.Control placeholder='description'/>
+                    </Form.Group>
+                </Form>
+            </Modal.Body>
+            <Modal.Footer>
+            <Button variant="secondary" onClick={handleClose}>
+                Close
+            </Button>
+            <Button variant="primary" onClick={handleClose}>
+                Save Changes
+            </Button>
+            </Modal.Footer>
+        </Modal>
         {posts ? (
             <>
                 {posts.map((post) => {
@@ -43,7 +73,10 @@ const Posts = () => {
                             <h4>{post.title}</h4>
                             <p>{post.description}</p>
                             <div style={{display: "flex", flexDirection: "row", justifyContent: "space-between"}}>
-                                <Button variant="outline-primary" style={{width: "100%", marginRight: "1rem"}}>Update</Button>
+                                <Button 
+                                onClick={() => updatePost(post)} 
+                                variant="outline-primary" 
+                                style={{width: "100%", marginRight: "1rem"}}>Update</Button>
                                 <Button 
                                 variant="outline-danger" 
                                 style={{width: "100%", marginRight: "1rem"}}
