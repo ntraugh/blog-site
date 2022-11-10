@@ -1,6 +1,8 @@
 import React, { useState } from 'react'
 import {Button, Form} from "react-bootstrap"
 import { useNavigate } from 'react-router-dom'
+import axios from "axios"
+
 
 const CreatePost = () => {
   const navigate = useNavigate()
@@ -21,6 +23,15 @@ const handleChange = (e) => {
 
 }
 
+const handleClick = (e) => {
+  e.preventDefault()
+  axios.post("/create", post)
+    .then(res => console.log(res))
+    .catch(err => console.log(err))
+
+}
+
+
   return (
     <div style={{width: "90%", textAlign: "center", margin: "auto auto"}}>
         <h1>Create a Post</h1>
@@ -39,9 +50,13 @@ const handleChange = (e) => {
           style={{marginBottom: "1rem"}}
           onChange={handleChange}/>
         </Form.Group>
-      </Form>
         <Button 
         variant="outline-success"
+        style={{width: "100%", marginBottom: "1rem"}}
+        onClick={handleClick}>Create</Button>
+      </Form>
+        <Button 
+        variant="outline-dark"
         style={{width: "100%"}}
         onClick={() => navigate("/")}>Back</Button>
     </div>

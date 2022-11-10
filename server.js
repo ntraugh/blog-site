@@ -12,6 +12,10 @@ app.get('/', (req, res) => {
   res.send('Hello World!')
 })
 
+app.post("/create", (req, res) => {
+    console.log(req.body)
+})
+
 app.listen(PORT, () => {
   console.log(`Example app listening on PORT ${PORT}`)
 })
