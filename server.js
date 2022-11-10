@@ -21,6 +21,11 @@ app.get('/', (req, res) => {
   res.send('Hello World!')
 })
 
+app.get("/posts", (req, res) => {
+    Post.find().then(items => res.json(items)).catch(err => console.log(err))
+
+})
+
 app.post("/create", (req, res) => {
     Post.create({
         title: req.body.title,
