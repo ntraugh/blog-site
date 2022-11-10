@@ -22,7 +22,11 @@ app.get('/', (req, res) => {
 })
 
 app.post("/create", (req, res) => {
-    console.log(req.body)
+    Post.create({
+        title: req.body.title,
+        description: req.body.description
+    }).then(doc => console.log(doc))
+    .catch(err => console.log(err))
 })
 
 app.listen(PORT, () => {
