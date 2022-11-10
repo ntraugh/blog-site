@@ -123,7 +123,7 @@ const Posts = () => {
         <Button 
         style={{width: "100%", margin: "0 0 1rem"}}
         variant="outline-primary" 
-        onClick={() => navigate("create")}>Back</Button>
+        onClick={() => navigate("/create")}>Back</Button>
     </div>
   )
 }
